@@ -51,6 +51,22 @@
 </template>
 
 
+<script setup>
+import { ref } from 'vue';
+import Docxtemplater from 'docxtemplater';
+import PizZip from 'pizzip';
+import { format, differenceInHours, differenceInMinutes } from 'date-fns';
+import { id } from 'date-fns/locale';
+import { saveAs } from 'file-saver';
+
+const nama = ref('');
+const nik = ref('');
+const keperluan = ref('');
+const tanggal_acc = ref('');
+const tanggalLembur = ref('');
+const timeStart = ref('');
+const timeEnd = ref('');
+
 const generateDocument = () => {
   // Path to the template file in the public folder
   const templatePath = '/spkl.docx';
@@ -119,6 +135,7 @@ const generateDocument = () => {
     });
 };
 
+</script>
 
 <style>
 body {
