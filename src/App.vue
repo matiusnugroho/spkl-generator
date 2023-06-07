@@ -51,22 +51,6 @@
 </template>
 
 
-<script setup>
-import { ref } from 'vue';
-import Docxtemplater from 'docxtemplater';
-import PizZip from 'pizzip';
-import { format, differenceInHours, differenceInMinutes } from 'date-fns';
-import { id } from 'date-fns/locale';
-import { saveAs } from 'file-saver';
-
-const nama = ref('');
-const nik = ref('');
-const keperluan = ref('');
-const tanggal_acc = ref('');
-const tanggalLembur = ref('');
-const timeStart = ref('');
-const timeEnd = ref('');
-
 const generateDocument = () => {
   // Path to the template file in the public folder
   const templatePath = '/spkl.docx';
@@ -117,13 +101,24 @@ const generateDocument = () => {
 
       const generatedDocument = doc.getZip().generate({ type: 'blob' });
       const outputFileName = `SPKL_${nama.value}_${formattedDate}.docx`;
-      saveAs(generatedDocument, outputFileName);
+
+      // Create a download link
+      const downloadLink = document.createElement('a');
+      downloadLink.href = URL.createObjectURL(generatedDocument);
+      downloadLink.download = outputFileName;
+
+      // Set the MIME type for the download link
+      const mimeType = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+      downloadLink.type = mimeType;
+
+      // Trigger the click event to start the download
+      downloadLink.click();
     })
     .catch(error => {
       console.error('Error fetching template file:', error);
     });
 };
-</script>
+
 
 <style>
 body {
