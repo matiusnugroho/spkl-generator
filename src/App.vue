@@ -118,17 +118,8 @@ const generateDocument = () => {
       const generatedDocument = doc.getZip().generate({ type: 'blob' });
       const outputFileName = `SPKL_${nama.value}_${formattedDate}.docx`;
 
-      // Create a download link
-      const downloadLink = document.createElement('a');
-      downloadLink.href = URL.createObjectURL(generatedDocument);
-      downloadLink.download = outputFileName;
-
-      // Set the MIME type for the download link
-      const mimeType = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
-      downloadLink.type = mimeType;
-
-      // Trigger the click event to start the download
-      downloadLink.click();
+      // Use FileSaver.js to save the generated document
+      saveAs(generatedDocument, outputFileName);
     })
     .catch(error => {
       console.error('Error fetching template file:', error);
@@ -136,6 +127,7 @@ const generateDocument = () => {
 };
 
 </script>
+
 
 <style>
 body {
