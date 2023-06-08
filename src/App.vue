@@ -1,6 +1,6 @@
 <template>
   <div class="container mx-auto py-8 max-w-sm">
-    <h1 class="text-3xl font-bold mb-2 text-center">Generate SKPL</h1>
+    <h1 class="text-3xl font-bold mb-2 text-center">Generate Surat Perintah Kerja Lembur</h1>
     <form @submit.prevent="generateDocument" class="bg-white rounded-lg shadow-lg p-6">
       <div class="mb-2">
         <label for="nama" class="text-sm font-medium">Nama:</label>
